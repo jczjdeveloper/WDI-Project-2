@@ -17,6 +17,8 @@
           a(href='/api') API Examples
         li(class=(title == 'Contact') ? 'active' : undefined)
           a(href='/contact') Contact
+        li(class=(title == 'Pricing') ? 'active' : undefined)
+          a(href='/pricing') Pricing
         li
           a(href='/status') Status
       ul.nav.navbar-nav.navbar-right
@@ -34,9 +36,9 @@
                 img(src=user.gravatar(60))
               span= user.profile.name || user.email || user.id
               i.caret
-            ul.dropdown-menu
-              li
-                a(href='/account') My Account
-              li.divider
-              li
-                a(href='/logout') Logout
+          ul.dropdown-menu
+            li
+              a(href='/account') My Account
+            li.divider
+            li
+              a(href='/logout') Logout
