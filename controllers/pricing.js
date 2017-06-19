@@ -1,9 +1,11 @@
 /**
- * GET /
+ * GET /pricing
  * Pricing page.
  */
-exports.index = (req, res) => {
-  res.render('pricing', {
-    title: 'Pricing'
+const Pricing = require('../models/Pricing.js');
+
+exports.getPricing = (req, res) => {
+  Pricing.find((err, docs) => {
+    res.render('pricing', { pricing: docs });
   });
 };
