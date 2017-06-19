@@ -1,13 +1,12 @@
 const express = require('express')
 const router = express.Router();
 
-
 const passport = require('passport');
 const passportConfig = require('../config/passport');
 
-// /**
-//  * Controllers (route handlers).
-//  */
+/**
+ * Controllers (route handlers).
+ */
 const homeController = require('../controllers/home');
 const pricingController = require('../controllers/pricing');
 const featuresController = require('../controllers/features');
@@ -16,9 +15,9 @@ const userController = require('../controllers/user');
 const contactController = require('../controllers/contact');
 const apiController = require('../controllers/api');
 
-// /**
-//  * Primary app routes.
-//  */
+/**
+ * Primary app routes.
+ */
 router.get('/', homeController.index);
 router.get('/pricing', pricingController.getPricing);
 router.get('/features', featuresController.getFeatures);

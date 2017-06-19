@@ -119,18 +119,18 @@ app.use((req, res, next) => {
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }));
 
 /**
- * Routes
+ * ROUTES
  */
 
 const api = require('./routes/api')
 const auth = require('./routes/auth')
 const mainRoutes = require('./routes/mainroutes')
-// const secretRoutes = require('./rouets/secretroutes')
+const secretRoutes = require('./routes/secretroutes')
 
 app.use('/api', api)
 app.use('/auth', auth)
 app.use('/', mainRoutes)
-// app.use('/secret', secretRoutes)
+app.use('/dashboard', secretRoutes)
 
 
 /**
