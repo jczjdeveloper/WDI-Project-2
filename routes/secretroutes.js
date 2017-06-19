@@ -28,12 +28,16 @@ router.all('/*', function(req, res, next){
  */
 const dashboardController = require('../controllers/dashboard');
 const remindersController = require('../controllers/reminders');
+const eventliveController = require('../controllers/eventlive');
+const createeventController = require('../controllers/createevent');
 
 
 // Secret routes
 
 router.get('/', dashboardController.getDashboard);
 router.get('/reminders', remindersController.getReminders);
+router.get('/eventlive', eventliveController.getEventlive);
+router.get('/createevent', createeventController.getCreateevent);
 
 
 module.exports = router;
