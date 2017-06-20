@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
 const createeventSchema = new mongoose.Schema({
-  name: String
+  name: String,
+  email: String
 });
 
 const Createevent = mongoose.model('Createevent', createeventSchema);

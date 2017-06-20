@@ -28,17 +28,6 @@ const upload = multer({ dest: path.join(__dirname, 'uploads') });
  */
 dotenv.load({ path: '.env.example' });
 
-// /**
-//  * Controllers (route handlers).
-//  */
-// const apiController = require('./controllers/api');
-// const homeController = require('./controllers/home');
-// const pricingController = require('./controllers/pricing');
-// const featuresController = require('./controllers/features');
-// const aboutController = require('./controllers/about');
-// const userController = require('./controllers/user');
-// const contactController = require('./controllers/contact');
-
 /**
  * API keys and Passport configuration.
  */
@@ -53,7 +42,7 @@ const app = express();
  * Connect to MongoDB.
  */
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/wdiproject2');
+mongoose.connect(process.env.MONGODB_URI || process.env.MONGODLAB_URI);
 mongoose.connection.on('error', (err) => {
   console.error(err);
   console.log('%s MongoDB connection error. Please make sure MongoDB is running.', chalk.red('✗'));
@@ -77,14 +66,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressValidator());
 app.use(session({
-  resave: true,
+  resave: false,
   saveUninitialized: true,
   secret: process.env.SESSION_SECRET,
   store: new MongoStore({
-    url: process.env.MONGODB_URI || process.env.MONGOLAB_URI,
+    url: process.env.MONGODB_URI,
     autoReconnect: true,
     clear_interval: 3600
   })
+  //cookie: {maxAge: 3600000}
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -118,6 +108,64 @@ app.use((req, res, next) => {
 });
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }));
 
+/* IMPORT SCHEMAS FOR TESTING */
+
+const Event = require('./models/event');
+const Guest = require('./models/guest');
+const createEvent = require('./models/createevent')
+
+// CREATE EVENT
+
+let event1 = new Event({
+name: "Eventone",
+description: "This is event one",
+date: "26 May 1990",
+location: "Shangrila",
+timestart: "six",
+guestlimit: "Hundred",
+guests: []
+});
+
+let createevent1 = new createEvent({
+  name: 'test'
+})
+
+createevent1.save()
+
+// CREATE GUEST
+
+let guest1 = new Guest({
+name: "guestone",
+email: "guestone@jc.com",
+});
+
+
+// PUSH GUEST INTO EVENT
+
+event1.guests.push(guest1);
+
+
+// SAVE HARDCODED DATA
+event1.save((err) => {
+if (err) {
+  console.log(err.message);
+  return;
+}
+console.log('event1 created');
+});
+
+guest1.save((err) => {
+if (err) {
+  console.log(err.message);
+  return;
+}
+console.log('guest1 created');
+});
+
+console.log(event1);
+console.log(guest1);
+
+
 /**
  * ROUTES
  */
@@ -131,6 +179,7 @@ app.use('/api', api)
 app.use('/auth', auth)
 app.use('/', mainRoutes)
 app.use('/dashboard', secretRoutes)
+
 
 
 

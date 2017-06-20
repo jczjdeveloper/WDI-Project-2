@@ -10,7 +10,7 @@ const User = require('../models/User');
  */
 exports.getLogin = (req, res) => {
   if (req.user) {
-    return res.redirect('/pricing');
+    return res.redirect('/dashboard');
   }
   res.render('account/login', {
     title: 'Login'
@@ -62,10 +62,11 @@ exports.logout = (req, res) => {
  */
 exports.getSignup = (req, res) => {
   if (req.user) {
-    return res.redirect('/');
+    return res.redirect('/dashboard');
   }
   res.render('account/signup', {
-    title: 'Create Account'
+    title: 'Create Account',
+    csrf: req.csrfToken()
   });
 };
 
@@ -86,10 +87,9 @@ exports.postSignup = (req, res, next) => {
     return res.redirect('/signup');
   }
 
-  const user = new User({
-    email: req.body.email,
-    password: req.body.password
-  });
+  const user = new User()
+  user.email = req.body.email;
+  user.password = req.body.password;
 
   User.findOne({ email: req.body.email }, (err, existingUser) => {
     if (err) { return next(err); }
@@ -97,6 +97,7 @@ exports.postSignup = (req, res, next) => {
       req.flash('errors', { msg: 'Account with that email address already exists.' });
       return res.redirect('/signup');
     }
+
     user.save((err) => {
       if (err) { return next(err); }
       req.logIn(user, (err) => {
