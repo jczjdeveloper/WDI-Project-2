@@ -8,14 +8,6 @@ block secret-content
   section.row.create
     .col-md-2.createGuest
       button#createbtn.btn.btn-success(type='button') Create
-    //- .col-md-2.col-md-offset-8.calc
-    //-   button.btn.btn-info(type='button') Calculate
-  //- section.row.total
-  //-   h1
-  //-     | Total:
-  //-     br
-  //-     |  $
-  //-     span#grandTotal 00.00
 
   #editform.modal.fade(tabindex='-1', role='dialog')
     .modal-dialog(role='document')
@@ -28,26 +20,18 @@ block secret-content
           .form-group
             label(for='name') Name
             input#name.form-control(type='text', placeholder='Name')
-          //- .form-group
-          //-   label(for='color') Color
-          //-   input#color.form-control(type='text', placeholder='Color')
           .form-group
             label(for='email') Email
             input#email.form-control(type='text', placeholder='Email')
             input#id.form-control(type='hidden')
         .modal-footer
           button.btn.btn-default(type='button', data-dismiss='modal') Close
-          button.btn.btn-primary.submit(type='button') Add Guest!
+          button#addguest.btn.btn-primary.submit(type='button') Add Guest!
 
   script#guestRowTpl(type='text/template').
     <div class="row guest" data-id="{{Id}}">
-    <div class="col-md-2 title">{{Name}}</div>
-    //- <div class="col-md-2 color">{{Color}}</div>
-    <div class="col-md-2 email">${{Email}}</div>
-    //- <div class="col-md-2 qtr">
-    //-   <input type="number" name="quantity" min="0" max="50" value="0"/>
-    //- </div>
-    //- <div class="col-md-2 subtotal">$0.00</div>
+    <div class="col-md-6 name">{{Name}}</div>
+    <div class="col-md-5 email">{{Email}}</div>
     <div class="col-md-1 delete">
       <button type="button" class="btn btn-danger">Delete</button>
     </div>

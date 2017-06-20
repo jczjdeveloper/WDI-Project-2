@@ -57,7 +57,7 @@ $(document).ready(function() {
     $('#editform').modal('show');
     $('#editform').addClass('createForm');
     $('.modal-title').text('Create guest');
-    //$('button.submit').text('Create');
+    // $('button.submit').text('Create');
   }
 
 
@@ -84,26 +84,28 @@ $(document).ready(function() {
   function createGuestAjax(){
 
     var guest = {};
-    //guest.id = $('.createForm #id').val();
     guest.name = $('.createForm #name').val();
     guest.email = $('.createForm #email').val();
-    console.log(guest )
+
     $.ajax({
       method: 'POST',
-      url: '/dashboard/event',
+      url: '/dashboard/Event',
       headers: {
         'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
       },
-      data: JSON.stringify(guest),
-      dataType: 'json'
+      data: guest
+      //dataType: 'json'
     }).done(function(guest){
       console.log('success!')
+      console.log(guest)
           createGuestRow(guest);
           $('[data-id=' + guest.id + ']').hide();
           $('#editform').modal('hide');
           $('[data-id=' + guest.id + ']').fadeIn();
+          $('.createForm #name').val('');
+          $('.createForm #email').val('');
     }).fail(function(){
-      console.log('fail')
+      console.error()
     });
   }
 
@@ -118,7 +120,7 @@ $(document).ready(function() {
 
       $.ajax({
         method: 'PUT',
-        url: '/dashboard/event',
+        url: '/dashboard/Event',
         data: guest
       }).done(function(data){
           resetModal();
@@ -137,7 +139,6 @@ $(document).ready(function() {
             $('[data-id=' + guest.id + ']').fadeIn();
           });
 
-         //
         //  $('[data-id=' + guest.id + ']').replaceWith(tpl);
         //  $('[data-id=' + guest.id + ']').fadeIn();
       });
@@ -166,7 +167,7 @@ $(document).ready(function() {
       updateGuestAjax();
   })
 
-  $('.submit').on('click', function(){
+  $('#addguest').on('click', function(){
       console.log('Attempting to create guest...')
       createGuestAjax();
   })
@@ -174,15 +175,17 @@ $(document).ready(function() {
   /* init event */
   $.ajax({
     method: "GET",
-    url: '/dashboard/event'
+    url: '/dashboard/Event'
   })
-  .done(function( data ) {
-      createdEvent = data;
-      data.forEach(function(guest){
-          createGuestRow(guest);
-      });
-
-  });
+  .done()
+  // {
+      //
+      // createdEvent = data;
+      // console.log(createdEvent);
+      // data.forEach(function(guest){
+      //     createGuestRow(guest);
+      // });
+  // });
 
   $('#editform').on('shown.bs.modal', function () {
     $('#name').focus();
