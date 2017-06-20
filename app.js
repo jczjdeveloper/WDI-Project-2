@@ -112,7 +112,6 @@ app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }))
 
 const Event = require('./models/event');
 const Guest = require('./models/guest');
-const createEvent = require('./models/createevent')
 
 // CREATE EVENT
 
@@ -125,12 +124,6 @@ timestart: "six",
 guestlimit: "Hundred",
 guests: []
 });
-
-let createevent1 = new createEvent({
-  name: 'test'
-})
-
-createevent1.save()
 
 // CREATE GUEST
 

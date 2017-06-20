@@ -90,7 +90,7 @@ $(document).ready(function() {
     console.log(guest )
     $.ajax({
       method: 'POST',
-      url: '/dashboard/createevent',
+      url: '/dashboard/event',
       headers: {
         'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
       },
@@ -118,7 +118,7 @@ $(document).ready(function() {
 
       $.ajax({
         method: 'PUT',
-        url: '/dashboard/createevent',
+        url: '/dashboard/event',
         data: guest
       }).done(function(data){
           resetModal();
@@ -174,14 +174,14 @@ $(document).ready(function() {
   /* init event */
   $.ajax({
     method: "GET",
-    url: '/dashboard/createevent'
+    url: '/dashboard/event'
   })
   .done(function( data ) {
       createdEvent = data;
-      // data.forEach(function(guest){
-      //     createGuestRow(guest);
-      // });
-      console.log(data)
+      data.forEach(function(guest){
+          createGuestRow(guest);
+      });
+
   });
 
   $('#editform').on('shown.bs.modal', function () {

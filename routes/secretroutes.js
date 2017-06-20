@@ -29,7 +29,7 @@ router.all('/*', function(req, res, next){
 const dashboardController = require('../controllers/dashboard');
 const remindersController = require('../controllers/reminders');
 const eventliveController = require('../controllers/eventlive');
-const createeventController = require('../controllers/createevent');
+const eventController = require('../controllers/event');
 
 
 // Secret routes
@@ -37,8 +37,8 @@ const createeventController = require('../controllers/createevent');
 router.get('/', dashboardController.getDashboard);
 router.get('/reminders', remindersController.getReminders);
 router.get('/eventlive', eventliveController.getEventlive);
-router.get('/createevent', createeventController.getCreateevent);
-router.post('/createevent', createeventController.postCreateEvent)
+router.get('/event', eventController.getEvent);
+router.post('/event', eventController.postEvent)
 
 
 // CRUD for EVENT data
@@ -47,14 +47,14 @@ router.post('/createevent', createeventController.postCreateEvent)
  *  List guests
  */
 router.get('/', (req, res, next) => {
-  res.json(createeventController.list());
+  res.json(eventController.list());
 });
 
 /*
  *  Create guest
  */
 router.post('/', (req, res, next) => {
-  const newGuest = createeventController.create(req.body);
+  const newGuest = eventController.create(req.body);
   res.json(newGuest);
 });
 
@@ -63,14 +63,14 @@ router.post('/', (req, res, next) => {
  */
  router.get('/:id', (req, res, next) => {
    const guestId = req.params.id;
-   res.json(createeventController.get(guestId));
+   res.json(eventController.get(guestId));
  });
 
  /*
   *  Update guest
   */
   router.put('/', (req, res, next) => {
-    const newGuest = createeventController.update(req.body);
+    const newGuest = eventController.update(req.body);
     res.json(newGuest);
   });
 
@@ -79,7 +79,7 @@ router.post('/', (req, res, next) => {
    */
    router.delete('/:id', (req, res, next) => {
      const guestId = req.params.id;
-     res.json(createeventController.delete(guestId));
+     res.json(eventController.delete(guestId));
    });
 
 
