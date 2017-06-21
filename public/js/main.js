@@ -71,7 +71,7 @@ $(document).ready(function() {
 
     // Setup template
     var tpl = $('#eventRowTpl').html();
-    //tpl = tpl.replace('{{Id}}', guest.id);
+    tpl = tpl.replace('{{Id}}', newEvent.id);
     tpl = tpl.replace('{{eventName}}', newEvent.name);
     tpl = tpl.replace('{{eventDescription}}', newEvent.description);
     tpl = tpl.replace('{{eventDate}}', newEvent.date);
@@ -92,11 +92,11 @@ $(document).ready(function() {
 
   // Show update form */
   function showUpdateForm(newEvent){
-    console.log('update');
+    console.log('clicked update!');
     $('#editform').modal('show');
     $('#editform').addClass('updateForm');
 
-    //$('#editform #id').val(guest.id);
+    $('#editform #id').val(newEvent.id);
     $('#editform #updateEventName').val(newEvent.name);
     $('#editform #updateEventDescription').val(newEvent.description);
     $('#editform #updateEventDate').val(newEvent.date);
@@ -107,7 +107,7 @@ $(document).ready(function() {
 
   /* Reset modal */
   function resetModal () {
-    //$('.updateForm #id').val('');
+    $('.updateForm #id').val('');
     $('.updateForm #eventName').val('');
     $('.updateForm #eventDescription').val('');
     $('.updateForm #eventDate').val('');
