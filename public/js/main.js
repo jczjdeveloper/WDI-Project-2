@@ -2,7 +2,7 @@ $(document).ready(function() {
 
   /* EVENT CREATION */
   var createdEvent = [];
-
+  var id;
   /* Delete Event */
   function deleteEvent(eventRow){
     $(eventRow).remove();
@@ -84,25 +84,32 @@ $(document).ready(function() {
 
 // Show create form
   function showCreateForm() {
-    $('#editform').modal('show');
-    $('#editform').addClass('createForm');
-    $('.modal-title').text('Create event');
+    $('#createform').modal('show');
+    $('#createform').addClass('createForm');
+    // $('.modal-title').text('Create event');
   }
 
 
   // Show update form */
-  function showUpdateForm(newEvent){
+  function showUpdateForm(id){
     console.log('clicked update!');
-    $('#editform').modal('show');
-    $('#editform').addClass('updateForm');
+    $('#updateform').modal('show');
+    $('#updateform').addClass('updateForm');
 
-    $('#editform #id').val(newEvent.id);
-    $('#editform #updateEventName').val(newEvent.name);
-    $('#editform #updateEventDescription').val(newEvent.description);
-    $('#editform #updateEventDate').val(newEvent.date);
-    $('#editform #updateEventLocation').val(newEvent.location);
-    $('#editform #updateEventTime').val(newEvent.timestart);
-
+    // Get id of clicked event to update
+    var id = id// event id
+    // Use id to retrieve event details
+    $.ajax({
+      method: 'GET',
+      url: '/dashboard/Event/' + id
+    }).done(function(data){
+      console.log('get request success')
+      $('.updateForm #eventUpdateName').val(data.name);
+      $('.updateForm #eventUpdateDescription').val(data.description);
+      $('.updateForm #eventUpdateDate').val(data.date);
+      $('.updateForm #eventUpdateLocation').val(data.location);
+      $('.updateForm #eventUpdateTime').val(data.timestart);
+    })
   }
 
   /* Reset modal */
@@ -136,17 +143,20 @@ $(document).ready(function() {
       //dataType: 'json'
     }).done(function(newEvent){
       console.log('success!')
-      console.log(newEvent)
-          createEventRow(newEvent);
-          $('[data-id=' + newEvent.id + ']').hide();
-          $('#editform').modal('hide');
-          $('[data-id=' + newEvent.id + ']').fadeIn();
+          //createEventRow(newEvent);
+
+          // $('[data-id=' + newEvent.id + ']').hide();
+          $('#createform').modal('hide').done(setTimeout(location.reload(), 4000));
+          resetModal()
+          // $('[data-id=' + newEvent.id + ']').fadeIn();
           // Reset modal after creating
-          $('.createForm #eventName').val('');
-          $('.createForm #eventDescription').val('');
-          $('.createForm #eventDate').val('');
-          $('.createForm #eventLocation').val('');
-          $('.createForm #eventTime').val('');
+          // $('.createForm #eventName').val('');
+          // $('.createForm #eventDescription').val('');
+          // $('.createForm #eventDate').val('');
+          // $('.createForm #eventLocation').val('');
+          // $('.createForm #eventTime').val('');
+
+          //setTimeout(location.reload(), 4000)
     }).fail(function(){
       console.error()
     });
@@ -154,8 +164,10 @@ $(document).ready(function() {
 
 
   // Update created Events on server
-  function updateEventAjax() {
-
+  function updateEventAjax(id) {
+    // get form inputs
+    var id = id
+    console.log(id)
     var newEvent = {};
     newEvent.name = $('.createForm #eventName').val();
     newEvent.description = $('.createForm #eventDescription').val();
@@ -163,32 +175,23 @@ $(document).ready(function() {
     newEvent.location = $('.createForm #eventLocation').val();
     newEvent.timestart = $('.createForm #eventTime').val();
 
+    // update event
       $.ajax({
         method: 'PUT',
-        url: '/dashboard/Event',
+        url: '/dashboard/event/' + id,
+        headers: {
+          'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+        },
         data: newEvent
       }).done(function(data){
           resetModal();
-
-          // Setup template
-          var tpl = $('#eventRowTpl').html();
-          tpl = tpl.replace('{{eventName}}', newEvent.name);
-          tpl = tpl.replace('{{eventDescription}}', newEvent.description);
-          tpl = tpl.replace('{{eventDate}}', newEvent.date);
-          tpl = tpl.replace('{{eventLocation}}', newEvent.location);
-          tpl = tpl.replace('{{eventTime}}', newEvent.timestart);
-
           // Hide
           $('#editform').modal('hide');
 
-          $('[data-id=' + newEvent.id + ']').fadeOut(function(){
-            $('[data-id=' + newEvent.id + ']').replaceWith(tpl);
-            $('[data-id=' + newEvent.id + ']').fadeIn();
           });
 
         //  $('[data-id=' + guest.id + ']').replaceWith(tpl);
         //  $('[data-id=' + guest.id + ']').fadeIn();
-      });
   }
 
 
@@ -206,23 +209,35 @@ $(document).ready(function() {
     showCreateForm();
   });
 
-// UPDATE BUTTON AFTER CREATION
-  $('#createdEventList').on('click', '.update', function(event){
-    var eventRow = $(event.target).parents('.event')[0];
-    var id = $(eventRow).data('id');
-    var event = createdEvent.find(function(event){
-        return event.id == id;
-    })
-    showUpdateForm(event);
+  $('.updateEventBtn').on('click', function(event){
+    console.log('clicked on Create!')
+    id = $(event.target).parents('.eventItemRow').find('.hidden').text()
+    console.log(id)
+    showUpdateForm(id);
   });
 
-  $('body').on('click', '.updateForm .submit', function(){
-      updateEventAjax();
+// UPDATE BUTTON AFTER CREATION
+  // $('#createdEventList').on('click', '.update', function(event){
+  //   var eventRow = $(event.target).parents('.event')[0];
+  //   var id = $(eventRow).data('id');
+  //   var event = createdEvent.find(function(event){
+  //       return event.id == id;
+  //   })
+  //   showUpdateForm(event);
+  // });
+
+  // $('body').on('click', '.updateForm .submit', function(){
+  //     updateEventAjax();
+  // })
+
+  $('#createEvent').on('click', function(){
+      console.log('Attempting to create event...')
+      createEventAjax();
   })
 
   $('#updateEvent').on('click', function(){
-      console.log('Attempting to create event...')
-      createEventAjax();
+      console.log('Attempting to update event...')
+      updateEventAjax(id);
   })
 
   /* init event */

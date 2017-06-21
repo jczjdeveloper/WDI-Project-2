@@ -38,7 +38,9 @@ router.get('/', dashboardController.getDashboard);
 router.get('/reminders', remindersController.getReminders);
 router.get('/eventlive', eventliveController.getEventlive);
 router.get('/event', eventController.getEvent);
+router.get('/event/:id', eventController.getOne)
 router.post('/event', eventController.postEvent)
+router.put('/event/:id', eventController.updateEvent)
 
 
 // CRUD for EVENT data

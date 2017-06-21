@@ -1,0 +1,13 @@
+
+
+.row .eventItemRow {
+  display: flex;
+  flex-direction: column;
+  background: green;
+  width: 400px;
+  border: 10px black solid;
+}
+
+.row .eventItemRow .col-md-6 {
+  display: inline;
+}
