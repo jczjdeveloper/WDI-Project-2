@@ -142,12 +142,12 @@ $(document).ready(function() {
       data: newEvent
       //dataType: 'json'
     }).done(function(newEvent){
-      console.log('success!')
+      console.log('success!');
           //createEventRow(newEvent);
 
           // $('[data-id=' + newEvent.id + ']').hide();
           $('#createform').modal('hide').done(setTimeout(location.reload(), 4000));
-          resetModal()
+          resetModal();
           // $('[data-id=' + newEvent.id + ']').fadeIn();
           // Reset modal after creating
           // $('.createForm #eventName').val('');
@@ -169,12 +169,12 @@ $(document).ready(function() {
     var id = id
     console.log(id)
     var newEvent = {};
-    newEvent.name = $('.createForm #eventName').val();
-    newEvent.description = $('.createForm #eventDescription').val();
-    newEvent.date = $('.createForm #eventDate').val();
-    newEvent.location = $('.createForm #eventLocation').val();
-    newEvent.timestart = $('.createForm #eventTime').val();
-
+    newEvent.name = $('.updateForm #eventUpdateName').val();
+    newEvent.description = $('.updateForm #eventUpdateDescription').val();
+    newEvent.date = $('.updateForm #eventUpdateDate').val();
+    newEvent.location = $('.updateForm #eventUpdateLocation').val();
+    newEvent.timestart = $('.updateForm #eventUpdateTime').val();
+    console.log(newEvent)
     // update event
       $.ajax({
         method: 'PUT',
@@ -183,11 +183,16 @@ $(document).ready(function() {
           'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
         },
         data: newEvent
-      }).done(function(data){
-          resetModal();
-          // Hide
-          $('#editform').modal('hide');
+      })
+      .done(function(data){
 
+          //resetModal();
+          $('#editform').modal('hide').done(setTimeout(location.reload(), 4000));
+          resetModal();
+          //location.reload();
+          //res.redirect('/dashboard/event');
+          // Hide
+          //$('#editform').modal('hide');
           });
 
         //  $('[data-id=' + guest.id + ']').replaceWith(tpl);
