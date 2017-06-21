@@ -9,12 +9,17 @@ block secret-content
     for e in event
       .row.eventItemRow(style='margin: 10px;') 
         .hidden #{e._id}
-        .col-md-6 Name: #{e.name}
-        .col-md-6 Starting Time: #{e.timestart}
-        .col-md-6 Date: #{e.date}
-        .col-md-6 Location: #{e.location}
-        .col-md-6 Description: #{e.description}
-        button.updateEventBtn.btn.btn-success(type='button') Update
+        .col-md-10 Name: #{e.name}
+        .col-md-10 Starting Time: #{e.timestart}
+        .col-md-10 Date: #{e.date}
+        .col-md-10 Location: #{e.location}
+        .col-md-10 Description: #{e.description}
+        .col-md-4
+          button.updateEventBtn.btn.btn-primary(type='button') Update
+        .col-md-4
+          button.updateEventBtn.btn.btn-primary(type='button') Create Guest List
+        .col-md-4
+          button.deleteEventBtn.btn.btn-danger(type='button') Delete
         
           
   section#createdEventList.row

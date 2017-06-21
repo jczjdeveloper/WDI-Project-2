@@ -3,10 +3,21 @@ $(document).ready(function() {
   /* EVENT CREATION */
   var createdEvent = [];
   var id;
+
   /* Delete Event */
-  function deleteEvent(eventRow){
-    $(eventRow).remove();
-  }
+  function deleteEvent(eventItemRow){
+    $(eventItemRow).remove();
+    console.log( typeof eventItemRow)
+    $.ajax({
+      method: 'DELETE',
+      url: '/dashboard/Event/' + id,
+      headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      },
+      data: eventItemRow
+    });
+    location.reload();
+  };
 
   /* Create Event */
   function createEvent(){
@@ -47,7 +58,7 @@ $(document).ready(function() {
         }
         $('.create .time .form-group').removeClass('has-error');
 
-        // Setup template
+        // Setup event template
         var tpl = $('#eventRowTpl').html();
         tpl = tpl.replace('{{eventName}}', name);
         tpl = tpl.replace('{{eventDescription}}', description);
@@ -103,7 +114,7 @@ $(document).ready(function() {
       method: 'GET',
       url: '/dashboard/Event/' + id
     }).done(function(data){
-      console.log('get request success')
+      //console.log('get request success')
       $('.updateForm #eventUpdateName').val(data.name);
       $('.updateForm #eventUpdateDescription').val(data.description);
       $('.updateForm #eventUpdateDate').val(data.date);
@@ -143,18 +154,8 @@ $(document).ready(function() {
       //dataType: 'json'
     }).done(function(newEvent){
       console.log('success!');
-          //createEventRow(newEvent);
-
-          // $('[data-id=' + newEvent.id + ']').hide();
           $('#createform').modal('hide').done(setTimeout(location.reload(), 4000));
           resetModal();
-          // $('[data-id=' + newEvent.id + ']').fadeIn();
-          // Reset modal after creating
-          // $('.createForm #eventName').val('');
-          // $('.createForm #eventDescription').val('');
-          // $('.createForm #eventDate').val('');
-          // $('.createForm #eventLocation').val('');
-          // $('.createForm #eventTime').val('');
 
           //setTimeout(location.reload(), 4000)
     }).fail(function(){
@@ -202,18 +203,22 @@ $(document).ready(function() {
 
 /* ATTACH EVENT LISTENERS */
 
-// DELETE BUTTON AFTER CREATION
-  $('#createdEventList').on('click', '.delete', function(event){
-    var eventRow = $(event.target).parents('.event')[0];
-    deleteEvent(eventRow);
+// DELETE BUTTON FOR EVENT
+  $('.deleteEventBtn').on('click', function(event){
+    console.log('clicked on delete!')
+    id = $(event.target).parents('.eventItemRow').find('.hidden').text()
+    //var eventRow = $(event.target).parents('.event')[0];
+    console.log(id);
+    deleteEvent();
   });
 
-// CREATE BUTTON
+// SHOW MODAL AFTER CLICKING CREATE (event)
   $('#createEventBtn').on('click', function(event){
     console.log('clicked on Create!')
     showCreateForm();
   });
 
+// SHOW UPDATE EVENT MODAL
   $('.updateEventBtn').on('click', function(event){
     console.log('clicked on Create!')
     id = $(event.target).parents('.eventItemRow').find('.hidden').text()
@@ -235,15 +240,17 @@ $(document).ready(function() {
   //     updateEventAjax();
   // })
 
+// Create event
   $('#createEvent').on('click', function(){
       console.log('Attempting to create event...')
       createEventAjax();
-  })
+  });
 
+// Update event
   $('#updateEvent').on('click', function(){
       console.log('Attempting to update event...')
       updateEventAjax(id);
-  })
+  });
 
   /* init event */
   $.ajax({
