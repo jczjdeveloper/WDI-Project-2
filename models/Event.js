@@ -9,10 +9,10 @@ const guestSchema = Guest.schema;
 const eventSchema = new mongoose.Schema({
   name: String,
   description: String,
-  date: Date,
+  date: String,
   location: String,
   timestart: String,
-  guestlimit: String,
+  //guestlimit: String,
   guests: [guestSchema]
 
 }, { timestamps: true });

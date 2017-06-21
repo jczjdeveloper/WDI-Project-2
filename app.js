@@ -108,55 +108,55 @@ app.use((req, res, next) => {
 });
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }));
 
-/* IMPORT SCHEMAS FOR TESTING */
-
-const Event = require('./models/event');
-const Guest = require('./models/guest');
-
-// CREATE EVENT
-
-let event1 = new Event({
-name: "Eventone",
-description: "This is event one",
-date: "26 May 1990",
-location: "Shangrila",
-timestart: "six",
-guestlimit: "Hundred",
-guests: []
-});
-
-// CREATE GUEST
-
-let guest1 = new Guest({
-name: "guestone",
-email: "guestone@jc.com",
-});
-
-
-// PUSH GUEST INTO EVENT
-
-event1.guests.push(guest1);
-
-
-// SAVE HARDCODED DATA
-event1.save((err) => {
-if (err) {
-  console.log(err.message);
-  return;
-}
-console.log('event1 created');
-});
-
-guest1.save((err) => {
-if (err) {
-  console.log(err.message);
-  return;
-}
-console.log('guest1 created');
-});
-
-console.log(event1);
-console.log(guest1);
+// /* IMPORT SCHEMAS FOR TESTING */
+//
+// const Event = require('./models/event');
+// const Guest = require('./models/guest');
+//
+// // CREATE EVENT
+//
+// let event1 = new Event({
+// name: "Eventone",
+// description: "This is event one",
+// date: "26 May 1990",
+// location: "Shangrila",
+// timestart: "six",
+// guestlimit: "Hundred",
+// guests: []
+// });
+//
+// // CREATE GUEST
+//
+// let guest1 = new Guest({
+// name: "guestone",
+// email: "guestone@jc.com",
+// });
+//
+//
+// // PUSH GUEST INTO EVENT
+//
+// event1.guests.push(guest1);
+//
+//
+// // SAVE HARDCODED DATA
+// event1.save((err) => {
+// if (err) {
+//   console.log(err.message);
+//   return;
+// }
+// console.log('event1 created');
+// });
+//
+// guest1.save((err) => {
+// if (err) {
+//   console.log(err.message);
+//   return;
+// }
+// console.log('guest1 created');
+// });
+//
+// console.log(event1);
+// console.log(guest1);
 
 
 /**

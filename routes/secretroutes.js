@@ -46,14 +46,14 @@ router.post('/event', eventController.postEvent)
 /*
  *  List guests
  */
-router.get('/', (req, res, next) => {
+router.get('/event', (req, res, next) => {
   res.json(eventController.list());
 });
 
 /*
  *  Create guest
  */
-router.post('/', (req, res, next) => {
+router.post('/event', (req, res, next) => {
   const newGuest = eventController.create(req.body);
   res.json(newGuest);
 });

@@ -33,11 +33,18 @@ footer {
 // Homepage content
 // -------------------------
 
-.homemaincontent {
+.homemaincontent #homecover {
   position: fixed;
   text-align: center;
-
 }
+
+#homecover {
+  background: black;
+  background-image: url("http://imgur.com/zIRxJwl");
+  height: 750px;
+}
+
+
 
 // Input Fields
 // -------------------------
