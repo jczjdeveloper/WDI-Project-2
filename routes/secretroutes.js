@@ -27,6 +27,7 @@ const dashboardController = require('../controllers/dashboard');
 const remindersController = require('../controllers/reminders');
 const eventliveController = require('../controllers/eventlive');
 const eventController = require('../controllers/event');
+//const guestController = require('../controllers/guest');
 
 
 // Secret routes
@@ -39,6 +40,7 @@ router.get('/event/:id', eventController.getOne);
 router.post('/event', eventController.postEvent);
 router.put('/event/:id', eventController.updateEvent);
 router.delete('/event/:id', eventController.deleteEvent);
+//router.get('/guest', eventController.getGuest);
 
 
 // // CRUD for EVENT data

@@ -12,7 +12,6 @@ const eventSchema = new mongoose.Schema({
   date: String,
   location: String,
   timestart: String,
-  //guestlimit: String,
   guests: [guestSchema]
 
 }, { timestamps: true });

@@ -1,23 +1,9 @@
 $(document).ready(function() {
 
-  /* EVENT CREATION */
+  /* EVENT and GUEST CREATION */
   var createdEvent = [];
   var id;
-
-  /* Delete Event */
-  function deleteEvent(eventItemRow){
-    $(eventItemRow).remove();
-    console.log( typeof eventItemRow)
-    $.ajax({
-      method: 'DELETE',
-      url: '/dashboard/Event/' + id,
-      headers: {
-        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-      },
-      data: eventItemRow
-    });
-    location.reload();
-  };
+  var createdGuest = [];
 
   /* Create Event */
   function createEvent(){
@@ -58,7 +44,7 @@ $(document).ready(function() {
         }
         $('.create .time .form-group').removeClass('has-error');
 
-        // Setup event template
+        // Setup template
         var tpl = $('#eventRowTpl').html();
         tpl = tpl.replace('{{eventName}}', name);
         tpl = tpl.replace('{{eventDescription}}', description);
@@ -151,13 +137,10 @@ $(document).ready(function() {
         'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
       },
       data: newEvent
-      //dataType: 'json'
     }).done(function(newEvent){
-      console.log('success!');
+      console.log('create success!');
           $('#createform').modal('hide').done(setTimeout(location.reload(), 4000));
           resetModal();
-
-          //setTimeout(location.reload(), 4000)
     }).fail(function(){
       console.error()
     });
@@ -168,6 +151,7 @@ $(document).ready(function() {
   function updateEventAjax(id) {
     // get form inputs
     var id = id
+    var updateUrl = '/dashboard/Event/' + id;
     console.log(id)
     var newEvent = {};
     newEvent.name = $('.updateForm #eventUpdateName').val();
@@ -176,29 +160,33 @@ $(document).ready(function() {
     newEvent.location = $('.updateForm #eventUpdateLocation').val();
     newEvent.timestart = $('.updateForm #eventUpdateTime').val();
     console.log(newEvent)
+
     // update event
       $.ajax({
         method: 'PUT',
-        url: '/dashboard/event/' + id,
+        url: updateUrl,
         headers: {
           'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
         },
         data: newEvent
       })
       .done(function(data){
-
-          //resetModal();
           $('#editform').modal('hide').done(setTimeout(location.reload(), 4000));
           resetModal();
-          //location.reload();
-          //res.redirect('/dashboard/event');
           // Hide
           //$('#editform').modal('hide');
-          });
+        })
+        .fail(function(){
+          location.reload();
+          console.error();
+        });
 
         //  $('[data-id=' + guest.id + ']').replaceWith(tpl);
         //  $('[data-id=' + guest.id + ']').fadeIn();
   }
+
+
+
 
 
 /* ATTACH EVENT LISTENERS */
@@ -226,19 +214,28 @@ $(document).ready(function() {
     showUpdateForm(id);
   });
 
-// UPDATE BUTTON AFTER CREATION
-  // $('#createdEventList').on('click', '.update', function(event){
-  //   var eventRow = $(event.target).parents('.event')[0];
-  //   var id = $(eventRow).data('id');
-  //   var event = createdEvent.find(function(event){
-  //       return event.id == id;
-  //   })
-  //   showUpdateForm(event);
-  // });
+  /* Delete Event */
+  function deleteEvent(eventItemRow){
 
-  // $('body').on('click', '.updateForm .submit', function(){
-  //     updateEventAjax();
-  // })
+    var deleteUrl = '/dashboard/Event/' + id;
+    console.log(deleteUrl);
+
+    $.ajax({
+      method: 'DELETE',
+      url: deleteUrl,
+      headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      },
+      data: eventItemRow
+    }).done(function() {
+      console.log('delete success');
+      $(eventItemRow).remove();
+        // find eventItemRow by Id and then delete
+    }).fail(function() {
+      location.reload();
+      console.error();
+    });
+  };
 
 // Create event
   $('#createEvent').on('click', function(){
@@ -250,6 +247,7 @@ $(document).ready(function() {
   $('#updateEvent').on('click', function(){
       console.log('Attempting to update event...')
       updateEventAjax(id);
+
   });
 
   /* init event */
@@ -272,3 +270,93 @@ $(document).ready(function() {
   });
 
 });
+
+
+
+
+
+
+
+
+//   /* CREATE GUEST */
+//   function createGuest(){
+//         var name = $("input[name='guestName']").val();
+//         var email = $("input[name='guestEmail']").val();
+//
+//         // Check input
+//         if(name.length === 0 ){
+//           $('.create .guestName .form-group').addClass('has-error');
+//           return;
+//         }
+//         $('.create .guestName .form-group').removeClass('has-error');
+//
+//         if(email.length === 0){
+//           $('.create .guestEmail .form-group').addClass('has-error');
+//           return;
+//         }
+//         $('.create .guestEmail .form-group').removeClass('has-error');
+//
+//         // Setup template
+//         var tpl = $('#addGuestTpl').html();
+//         tpl = tpl.replace('{{guestName}}', guestName);
+//         tpl = tpl.replace('{{guestEmail}}', guestEmail);
+//
+//         // Append the row
+//         $('#addedGuestList > div').append(tpl);
+//
+//         // Clear inputs
+//         $("input[name='guestName']").val('');
+//         $("input[name='guestEmail']").val('');
+//
+//   /* Create Guest Row */
+//   function createGuestRow(newGuest){
+//
+//     // Setup template
+//     var tpl = $('#eventRowTpl').html();
+//     tpl = tpl.replace('{{Id}}', newEvent.id);
+//     tpl = tpl.replace('{{guestName}}', newGuest.name);
+//     tpl = tpl.replace('{{guestEmail}}', newGuest.description);
+//
+//     // Append the row
+//     $('#addedGuestList > div').append(tpl);
+//   }
+//
+//   // Create new event on server
+//   function createGuestAjax(){
+//
+//     var newGuest = {};
+//     newGuest.name = $('.addGuestForm #guestName').val();
+//     newGuest.email = $('.addGuestForm #eventEmail').val();
+//
+//     $.ajax({
+//       method: 'POST',
+//       url: '/dashboard/guest',
+//       headers: {
+//         'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+//       },
+//       data: newGuest
+//     }).done(function(newGuest){
+//       console.log('added guest successfully!');
+//           $('#addGuestForm').modal('hide').done(setTimeout(location.reload(), 4000));
+//           resetModal();
+//     }).fail(function(){
+//       console.error()
+//     });
+//   }
+//
+//
+//
+// // Show create form
+//   function showAddGuestForm() {
+//     $('#addGuestForm').modal('show');
+//     $('#addGuestForm').addClass('addGuestForm');
+//   };
+//
+// // ADD GUEST EVENT LISTENERS
+//
+// // SHOW MODAL AFTER CLICKING ADD GUEST
+//   $('#addGuestBtn').on('click', function(guest){
+//     console.log('clicked on Add Guest!')
+//     showAddGuestForm();
+//   });
+// }

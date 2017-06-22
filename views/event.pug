@@ -82,6 +82,25 @@ block secret-content
         .modal-footer
           button.btn.btn-default(type='button', data-dismiss='modal') Close
           button#updateEvent.btn.btn-primary.submit(type='Submit') Update
+    
+  //- #addGuestForm.modal.fade(tabindex='-1', role='dialog')
+  //-   .modal-dialog(role='document')
+  //-     .modal-content
+  //-       .modal-header
+  //-         button.close(type='button', data-dismiss='modal', aria-label='Close')
+  //-           span(aria-hidden='true') ×
+  //-         h4.modal-title Add Guest
+  //-       .modal-body
+  //-         .form-group
+  //-           label(for='guestName') Guest Name
+  //-           input#guestName.form-control(type='text', placeholder='Enter guest name' name="guestName")
+  //-         .form-group
+  //-           label(for='guestEmail') Guest Email
+  //-           input#guestEmail.form-control(type='text', placeholder='Enter guest email' name="guestEmail")
+  //-           input#guestId.form-control(type='hidden')
+  //-       .modal-footer
+  //-         button.btn.btn-default(type='button', data-dismiss='modal') Close
+  //-         button#addGuest.btn.btn-primary.submit(type='Submit') Add Guest
 
   script#eventRowTpl(type='text/template').
     <div class="row event" data-id="{{Id}}">
@@ -102,6 +121,20 @@ block secret-content
       <button type="button" class="btn btn-info">Update</button>
     </div>
     </div>
+    
+  //- script#addGuestTpl(type='text/template').
+  //-   <div class="row guest" data-id="{{Id}}">
+  //-   <div class="col-md-6 guestName">{{guestName}}</div>
+  //-   <br />
+  //-   <div class="col-md-6 guestEmail">{{guestEmail}}</div>
+  //-   <br />
+  //-   <div class="col-md-2 delete">
+  //-     <button type="button" class="btn btn-danger">Delete</button>
+  //-   </div>
+  //-   <div class="col-md-2 update">
+  //-     <button type="button" class="btn btn-info">Update</button>
+  //-   </div>
+  //-   </div>
 
 
 block scripts
