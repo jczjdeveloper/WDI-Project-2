@@ -2,7 +2,7 @@
  * GET /event
  * CREATE EVENT PAGE!
  */
-const Event = require('../models/event.js');
+const Event = require('../models/Event.js');
 
 exports.getEvent = (req, res) => {
   Event.find((err, docs) => {

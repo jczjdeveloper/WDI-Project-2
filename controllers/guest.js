@@ -3,4 +3,4 @@
  * CREATING A GUEST FOR THE EVENT!
  */
 
-const Guest = require('../models/guest.js');
+const Guest = require('../models/Guest.js');
