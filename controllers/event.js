@@ -30,7 +30,7 @@ exports.postEvent = (req, res) => {
     if (err) {
       res.json({message: 'could not create event because: ' + err})
     } else {
-      res.redirect('/dashboard/Event')
+      //res.redirect('/dashboard/Event')
     }
   })
 }
@@ -48,7 +48,7 @@ exports.updateEvent = (req, res) => {
       if (err) {
         res.json({message: 'could not create event because: ' + err})
       } else {
-        res.redirect('/dashboard/Event')
+        //res.redirect('/dashboard/Event')
       }
     })
   })
@@ -62,7 +62,7 @@ exports.deleteEvent = (req, res) => {
       if (err) {
         res.json({message: 'could not delete event because: ' + err})
       } else {
-        res.redirect('/dashboard/Event')
+        //res.redirect('/dashboard/Event')
       }
     })
   })

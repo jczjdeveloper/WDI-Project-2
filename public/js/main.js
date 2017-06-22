@@ -177,7 +177,7 @@ $(document).ready(function() {
           //$('#editform').modal('hide');
         })
         .fail(function(){
-          location.reload();
+          //location.reload();
           console.error();
         });
 
@@ -232,7 +232,7 @@ $(document).ready(function() {
       $(eventItemRow).remove();
         // find eventItemRow by Id and then delete
     }).fail(function() {
-      location.reload();
+      //location.reload();
       console.error();
     });
   };
