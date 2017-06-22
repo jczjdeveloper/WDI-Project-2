@@ -42,15 +42,18 @@ footer {
 #homecover {
   height: auto;
   text-align: center;
+  height: 300px;
 }
 
 // CONTACT PAGE
 // -------------------------
 
-#contactFormSendBtn, #loginBtn, #createAccountBtn, #updateProfileBtn, #changePasswordBtn {
+#contactFormSendBtn, #loginBtn, #createAccountBtn, #updateProfileBtn, #changePasswordBtn, #startExploringBtn, #dashboardUpcomingEvents, #dashboardOrganizedEvents, #createEventBtn {
   border-radius: 20%;
   border-color: black;
   background-color: black;
+  text-align: center;
+  font-size: 15px;
 }
 
 // LOGIN PAGE
@@ -59,6 +62,22 @@ footer {
 #signUpLink, #forgotPasswordLink, .accountLinkingLinks {
   color: white;
 }
+
+// CREATE EVENT PAGE
+// -------------------------
+
+#createform, #updateform {
+  color: black;
+}
+
+#createEvent, #updateEvent {
+  background-color: #27be89;
+}
+
+.updateEventBtn .addGuestBtn .deleteEventBtn {
+  margin: 5px;
+}
+
 
 // Input Fields
 // -------------------------

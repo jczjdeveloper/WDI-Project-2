@@ -1,14 +1,22 @@
-
-
 .row .eventItemRow {
   display: flex;
   flex-direction: column;
-  background: green;
+  background: #0d594b;
   width: 800px;
-  border: 10px black solid;
-  font-size: 20px;
+  border: 2px black solid;
+  font-size: 18px;
+  padding: 5px;
 }
 
 .row .eventItemRow .col-md-6 {
   display: inline;
+}
+
+.col-md-12 {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.updateEventBtn .addGuestBtn .deleteEventBtn {
+  margin: 5px;
 }

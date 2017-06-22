@@ -1,19 +1,20 @@
 extends secret-layout
 
 block secret-content
-  h1 This is your DASHBOARD!
-  p.lead Guestlist management at your fingertips.
+  h1 DASHBOARD
+  p.lead Here is a summary of organized and upcoming events:
   hr  
   .container
   .row
     .col-md-12
       organizedevents
-        h1 Organized events should be appended here with their details.
+        h1 Organized events:
+        p You currently do not have any organized events. Create one now!
         p
-          a.btn.btn-primary.btn-lg(href='#', role='button') Find out more
+          a#dashboardOrganizedEvents.btn.btn-primary.btn-lg(href='/dashboard/event', role='button') Let's do it!
   .row
     .col-md-12
       upcomingevents
-        h1 Upcoming events should be appended here with their details.
+        h1 Upcoming events:
+        p You currently do not have any organized events.
         p
-          a.btn.btn-primary.btn-lg(href='#', role='button') Find out more

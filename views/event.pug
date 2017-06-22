@@ -6,26 +6,30 @@ block individualcss
 block secret-content
   header.row.header
     h1 Create an event!
+    hr
     for e in event
       .row.eventItemRow(style='margin: 10px;') 
         .hidden #{e._id}
-        .col-md-10 Name: #{e.name}
-        .col-md-10 Starting Time: #{e.timestart}
-        .col-md-10 Date: #{e.date}
-        .col-md-10 Location: #{e.location}
-        .col-md-10 Description: #{e.description}
+        .col-md-12 Name: #{e.name}
+        .col-md-12 Starting Time: #{e.timestart}
+        .col-md-12 Date: #{e.date}
+        .col-md-12 Location: #{e.location}
+        .col-md-12 Description: #{e.description}
         .col-md-4
           button.updateEventBtn.btn.btn-primary(type='button') Update
+          br
         .col-md-4
           button.addGuestBtn.btn.btn-primary(type='button') Add Guest
+          br
         .col-md-4
           button.deleteEventBtn.btn.btn-danger(type='button') Delete
+          br
         
   section#createdEventList.row
     .col-md-12
   section.row.create
     .col-md-2.createEvent
-      button#createEventBtn.btn.btn-success(type='button') Create Event!
+      button#createEventBtn.btn.btn-success(type='button') Create
 
   #createform.modal.fade(tabindex='-1', role='dialog')
     .modal-dialog(role='document')
