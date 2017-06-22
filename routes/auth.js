@@ -13,24 +13,24 @@ router.get('/auth/instagram', passport.authenticate('instagram'));
 router.get('/auth/instagram/callback', passport.authenticate('instagram', { failureRedirect: '/login' }), (req, res) => {
   res.redirect('/dashboard');
 });
-router.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'public_profile'] }));
-router.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }), (req, res) => {
+router.get('/facebook', passport.authenticate('facebook', { scope: ['email', 'public_profile'] }));
+router.get('/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }), (req, res) => {
   res.redirect('/dashboard');
 });
 router.get('/auth/github', passport.authenticate('github'));
 router.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/login' }), (req, res) => {
   res.redirect('/dashboard');
 });
-router.get('/auth/google', passport.authenticate('google', { scope: 'profile email' }));
-router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
+router.get('/google', passport.authenticate('google', { scope: 'profile email' }));
+router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
   res.redirect('/dashboard');
 });
 router.get('/auth/twitter', passport.authenticate('twitter'));
 router.get('/auth/twitter/callback', passport.authenticate('twitter', { failureRedirect: '/login' }), (req, res) => {
   res.redirect('/dashboard');
 });
-router.get('/auth/linkedin', passport.authenticate('linkedin', { state: 'SOME STATE' }));
-router.get('/auth/linkedin/callback', passport.authenticate('linkedin', { failureRedirect: '/login' }), (req, res) => {
+router.get('/linkedin', passport.authenticate('linkedin', { state: 'SOME STATE' }));
+router.get('/linkedin/callback', passport.authenticate('linkedin', { failureRedirect: '/login' }), (req, res) => {
   res.redirect('/dashboard');
 });
 
