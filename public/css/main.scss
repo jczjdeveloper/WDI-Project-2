@@ -39,9 +39,11 @@ footer {
 }
 
 #homecover {
-  background: black;
+  height: auto;
+  width: auto;
+  background-position: center;
+  background-size: cover;
   background-image: url("http://imgur.com/zIRxJwl");
-  height: 750px;
 }
 
 
