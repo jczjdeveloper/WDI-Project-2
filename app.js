@@ -61,7 +61,7 @@ app.use(sass({
   src: path.join(__dirname, 'public'),
   dest: path.join(__dirname, 'public')
 }));
-app.use(logger('dev'));
+//app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressValidator());
@@ -70,7 +70,7 @@ app.use(session({
   saveUninitialized: true,
   secret: process.env.SESSION_SECRET,
   store: new MongoStore({
-    url: process.env.MONGODB_URI,
+    url: process.env.MONGODB_URI || process.env.MONGODLAB_URI,
     autoReconnect: true,
     clear_interval: 3600
   })
