@@ -2,7 +2,7 @@
  * GET /eventlive
  * Eventlive page.
  */
-const Eventlive = require('../models/Eventlive.js');
+const Eventlive = require('../models/eventlive.js');
 
 exports.getEventlive = (req, res) => {
   Eventlive.find((err, docs) => {

@@ -2,7 +2,7 @@
  * GET /reminders
  * Reminders customization page.
  */
-const Reminders = require('../models/Reminders.js');
+const Reminders = require('../models/reminders.js');
 
 exports.getReminders = (req, res, next) => {
   Reminders.find((err, docs) => {
