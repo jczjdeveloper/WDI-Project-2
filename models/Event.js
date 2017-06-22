@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt-nodejs');
 const crypto = require('crypto');
 const mongoose = require('mongoose');
 
-const Guest = require('./guest');
+const Guest = require('./Guest');
 
 const guestSchema = Guest.schema;
 
