@@ -8,17 +8,17 @@ block content
     .form-group
       label.col-sm-3.control-label(for='email') Email
       .col-sm-7
-        input.form-control(type='email', name='email', id='email', placeholder='Email', autofocus, required)
+        input.form-control(type='email', name='email', id='email', placeholder='Enter Email', autofocus, required)
     .form-group
       label.col-sm-3.control-label(for='password') Password
       .col-sm-7
-        input.form-control(type='password', name='password', id='password', placeholder='Password', required)
+        input.form-control(type='password', name='password', id='password', placeholder='Enter Password', required)
     .form-group
       label.col-sm-3.control-label(for='confirmPassword') Confirm Password
       .col-sm-7
         input.form-control(type='password', name='confirmPassword', id='confirmPassword', placeholder='Confirm Password', required)
     .form-group
       .col-sm-offset-3.col-sm-7
-        button.btn.btn-success(type='submit')
+        button#createAccountBtn.btn.btn-success(type='submit')
           i.fa.fa-user-plus
           | Signup

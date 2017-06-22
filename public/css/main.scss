@@ -10,12 +10,18 @@
 
 html {
   position: relative;
-  min-height: 100%;
+  // min-height: 100%;
 }
 
 body {
   padding-top: 60px;
   margin-bottom: 75px;
+  background: #179880;
+  background: -webkit-linear-gradient(left, #179880 , #27be89);
+  background: -o-linear-gradient(right, #179880, #27be89);
+  background: -moz-linear-gradient(right, #179880, #27be89);
+  background: linear-gradient(to right, #179880 , #27be89);
+  color: white;
 }
 
 footer {
@@ -30,23 +36,29 @@ footer {
   }
 }
 
-// Homepage content
+// HOMEPAGE
 // -------------------------
-
-.homemaincontent #homecover {
-  position: fixed;
-  text-align: center;
-}
 
 #homecover {
   height: auto;
-  width: auto;
-  background-position: center;
-  background-size: cover;
-  background-image: url("http://imgur.com/zIRxJwl");
+  text-align: center;
 }
 
+// CONTACT PAGE
+// -------------------------
 
+#contactFormSendBtn, #loginBtn, #createAccountBtn, #updateProfileBtn, #changePasswordBtn {
+  border-radius: 20%;
+  border-color: black;
+  background-color: black;
+}
+
+// LOGIN PAGE
+// -------------------------
+
+#signUpLink, #forgotPasswordLink, .accountLinkingLinks {
+  color: white;
+}
 
 // Input Fields
 // -------------------------
@@ -86,12 +98,6 @@ textarea {
 .fa {
   margin-right: 6px;
 }
-
-
-
-
-
-
 
 /*
 Author: Bootstrapthemes
@@ -176,10 +182,10 @@ Pricint fiv
 
 .bs-five-area .bs-five.active {
     background: #179880;
-    background: -webkit-linear-gradient(left, #179880 , #21A476);
-    background: -o-linear-gradient(right, #179880, #21A476);
-    background: -moz-linear-gradient(right, #179880, #21A476);
-    background: linear-gradient(to right, #179880 , #21A476);
+    background: -webkit-linear-gradient(left, #179880 , #27be89);
+    background: -o-linear-gradient(right, #179880, #27be89);
+    background: -moz-linear-gradient(right, #179880, #27be89);
+    background: linear-gradient(to right, #179880 , #27be89);
 }
 
 .bs-five-area .bs-five .btn-success{
@@ -230,7 +236,7 @@ Pricint fiv
 
 
 
-// STYLING FOR CREATING CANDY STORE CANDIES
+// STYLING FOR CRUD OF EVENTS
 /* apply a natural box layout model to all elements, but allowing components to change */
 html {
   box-sizing: border-box;
@@ -238,37 +244,6 @@ html {
 *, *:before, *:after {
   box-sizing: inherit;
 }
-
-.cart {
-  border-top: 1px solid #EEEEEE;
-}
-
-
-
-.product {
-  margin-top:20px;
-  height: 50px;
-  margin-bottom: 20px;
-  line-height: 50px;
-}
-
-.product:hover {
-  background-color: #EEEEEE;
-}
-
-.product input {
-  height: 40px;
-  width: 100px;
-}
-
-.product .delete, .product .update {
-  display: none;
-}
-
-.product:hover .delete, .product:hover .update {
-  display: block;
-}
-
 
 
 .create {
@@ -304,8 +279,3 @@ html {
   left: 15px;
   margin-top: -20px;
 }
-
-// row .eventItemRow {
-//   margin: 40px 0;
-//   background: blue;
-// }
