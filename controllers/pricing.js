@@ -2,7 +2,7 @@
  * GET /pricing
  * Pricing page.
  */
-const Pricing = require('../models/Pricing.js');
+const Pricing = require('../models/pricing.js');
 
 exports.getPricing = (req, res, next) => {
   Pricing.find((err, docs) => {
