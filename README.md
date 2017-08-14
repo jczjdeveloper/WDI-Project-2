@@ -1,14 +1,29 @@
+listt
 
+Guestlist Management at your Fingertips
+A web application built with Node.js & Express.js as the server and MongoDB as the backend infrastructure.
 
-License
--------
+Background
 
-The MIT License (MIT)
+Why listt? 
+Event organizers that host multiple events may lose track of their details. listt was built to help organizers keep tabs on all their different events.
 
-Copyright (c) 2014-2016 Sahat Yalkabov
+How to install
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+Open your terminal and type the following commands:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+$ git clone https://github.com/jczjdeveloper/WDI-Project-2.git
+$ cd WDI-Project-2/
+$ npm install
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+To run the web application, you will need to setup:
+
+Facebook developer account - for login
+Google developer account - for login
+Linkednin developer account - for login
+Collect all the secret keys and save them in .env file
+
+To run the code:
+
+$ cd WDI-Project-2/
+$ nodemon --exec npm start
